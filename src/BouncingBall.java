@@ -1,6 +1,7 @@
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.geom.Ellipse2D;
+import java.awt.geom.Rectangle2D;
 import java.lang.Math;
 public class BouncingBall implements Runnable {
 	// Максимальный радиус, который может иметь мяч
@@ -75,25 +76,25 @@ public class BouncingBall implements Runnable {
 		field.canMoveFast(this);
 			}
 		field.canMove(this);
-		if (x + speedX <= radius) {
+		if (x + speedX <= radius + 20) {
 		// Достигли левой стенки, отскакиваем право
 		speedX = -speedX;
-		x = radius;
+		x = radius + 20;
 		} else
-		if (x + speedX >= field.getWidth() - radius) {
+		if (x + speedX >= field.getWidth() - radius - 20) {
 		// Достигли правой стенки, отскок влево
 		 speedX = -speedX;
-		 x=new Double(field.getWidth()-radius).intValue();
+		 x=new Double(field.getWidth()-radius - 20).intValue();
 		} else
-		if (y + speedY <= radius) {
+		if (y + speedY <= radius + 20) {
 		// Достигли верхней стенки
 		speedY = -speedY;
-		y = radius;
+		y = radius + 20;
 		} else
-		if (y + speedY >= field.getHeight() - radius) {
+		if (y + speedY >= field.getHeight() - radius - 20) {
 		// Достигли нижней стенки
 		 speedY = -speedY;
-		 y=new Double(field.getHeight()-radius).intValue();
+		 y=new Double(field.getHeight()-radius-20).intValue();
 		} else {
 		// Просто смещаемся
 		x += speedX;
@@ -115,7 +116,7 @@ public class BouncingBall implements Runnable {
 		public void paint(Graphics2D canvas) {
 		canvas.setColor(color);
 		canvas.setPaint(color);
-		Ellipse2D.Double ball = new Ellipse2D.Double(x-radius, y-radius, 
+		Rectangle2D.Double ball = new Rectangle2D.Double(x-radius, y-radius, 
 		2*radius, 2*radius);
 		canvas.draw(ball);
 		canvas.fill(ball);
